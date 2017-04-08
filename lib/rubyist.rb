@@ -4,9 +4,14 @@ require 'time'
 
 class Rubyist
   attr_reader :name
+  include Comparable
 
   def initialize name
     @name = name
+  end
+
+  def <=>(other)
+    name <=> other.name
   end
 
   def gems
@@ -19,10 +24,15 @@ class Rubyist
 
   class Gem
     attr_reader :name, :info, :homepage_uri, :project_uri
+    include Comparable
 
     def initialize hash
       @name, @info, @homepage_uri, @project_uri =
         %w[name info homepage_uri project_uri].map { |k| hash[k] }
+    end
+
+    def <=>(other)
+      name <=> other.name
     end
 
     def versions
