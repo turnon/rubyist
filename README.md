@@ -1,6 +1,6 @@
 # Rubyist
 
-Know gems owned by someone
+Just made this to know gems owned by someone, and forget the [gems](https://github.com/rubygems/gems) and [rubygems.org API](http://guides.rubygems.org/rubygems-org-api/)
 
 ## Installation
 
@@ -38,3 +38,8 @@ irb(main):005:0> Rubyist::Gem::Version.instance_methods false
 => [:summary, :number, :downloads, :created_at]
 ```
 
+CLI
+
+```
+$ rubyist tenderlove
+```

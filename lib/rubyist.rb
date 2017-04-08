@@ -15,7 +15,9 @@ class Rubyist
   end
 
   def gems
-    @gems ||= Gems.gems(name).map { |g| Gem.new g }
+    return @gems if defined? @gems
+    result = Gems.gems(name)
+    @gems = (Hash === result ? [] : result.map { |g| Gem.new g })
   end
 
   def total_downloads

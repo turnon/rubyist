@@ -1,0 +1,39 @@
+require 'rubyist'
+
+def help
+  puts <<~EOH
+    Usage: rubyist [OPTION]... NAME
+    List gems owned by NAME, ordered by download count
+
+      -v also show versions
+      -h help
+  EOH
+end
+
+def help?
+  ARGV.include? '-h'
+end
+
+def versions?
+  ARGV.include? '-v'
+end
+
+name = (ARGV - ['-v', '-h']).first
+
+if help? or name.nil?
+  help
+  exit
+end
+
+Rubyist.
+  named(name).
+  gems.
+  sort { |g1, g2| g1.total_downloads <=> g2.total_downloads }.
+  each do |g|
+    puts "#{g.name} #{g.total_downloads} > #{g.homepage_uri or g.project_uri}"
+    puts "#{g.info}"
+    g.versions.each do |v|
+      puts "  #{v.number} #{v.downloads}"
+    end if versions?
+    puts
+  end
