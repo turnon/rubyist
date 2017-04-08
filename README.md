@@ -20,18 +20,21 @@ Or install it yourself as:
 
 ## Usage
 
-```ruby
-rubyist = Rubyist.new 'arthurnn'
+```
+irb(main):001:0> Rubyist.own('kaminari').include? Rubyist.named('a_matsuda')
+=> true
 ```
 
 Interfaces as below
 
-```ruby
-irb(main):001:0> Rubyist.instance_methods false
-=> [:name, :gems, :total_downloads]
-irb(main):002:0> Rubyist::Gem.instance_methods false
-=> [:name, :info, :versions, :total_downloads, :homepage_uri, :project_uri]
-irb(main):003:0> Rubyist::Gem::Version.instance_methods false
+```
+irb(main):002:0> Rubyist.methods false
+=> [:named, :own]
+irb(main):003:0> Rubyist.instance_methods false
+=> [:<=>, :name, :gems, :total_downloads]
+irb(main):004:0> Rubyist::Gem.instance_methods false
+=> [:<=>, :name, :info, :versions, :total_downloads, :homepage_uri, :project_uri]
+irb(main):005:0> Rubyist::Gem::Version.instance_methods false
 => [:summary, :number, :downloads, :created_at]
 ```
 

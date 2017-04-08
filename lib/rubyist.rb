@@ -22,6 +22,15 @@ class Rubyist
     gems.inject(0) { |sum, g| sum + g.total_downloads }
   end
 
+  class << self
+    alias_method :named, :new
+
+    def own gem_name
+      Gems.owners(gem_name).
+        map { |o| new o['handle'] }
+    end
+  end
+
   class Gem
     attr_reader :name, :info, :homepage_uri, :project_uri
     include Comparable

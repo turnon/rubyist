@@ -7,7 +7,6 @@ class RubyistTest < Minitest::Test
   end
 
   def test_that_it_does_something_useful
-    skip
     rbi = Rubyist.new 'a_matsuda'
     rbi.gems.each do |g|
       puts "#{g.name} #{g.total_downloads}"
@@ -23,4 +22,11 @@ class RubyistTest < Minitest::Test
     a_matsuda_2 = Rubyist.new 'a_matsuda'
     assert a_matsuda_1 == a_matsuda_2
   end
+
+  def test_own
+    a_matsuda = Rubyist.new 'a_matsuda'
+    rubyists = Rubyist.own 'kaminari'
+    assert_includes rubyists, a_matsuda
+  end
+
 end
