@@ -3,11 +3,14 @@ require 'gems'
 require 'time'
 
 class Rubyist
-  attr_reader :name, :gems
+  attr_reader :name
 
   def initialize name
     @name = name
-    @gems = Gems.gems(name).map { |g| Gem.new g }
+  end
+
+  def gems
+    @gems ||= Gems.gems(name).map { |g| Gem.new g }
   end
 
   def total_downloads
@@ -15,13 +18,15 @@ class Rubyist
   end
 
   class Gem
-    attr_reader :name, :info, :homepage_uri, :project_uri, :versions
+    attr_reader :name, :info, :homepage_uri, :project_uri
 
     def initialize hash
       @name, @info, @homepage_uri, @project_uri =
         %w[name info homepage_uri project_uri].map { |k| hash[k] }
+    end
 
-      @versions = Gems.versions(name).map { |v| Version.new v }
+    def versions
+      @versions ||= Gems.versions(name).map { |v| Version.new v }
     end
 
     def total_downloads
